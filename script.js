@@ -9,8 +9,7 @@ var title = document.querySelector(".title");
 var searchInput = document.getElementById("search");
 var idNum;
 var userInfo;
-userInfo = JSON.parse(localStorage.getItem("info"));
-displayUser(userInfo);
+
 function addUser() {
   var user = {
     first: firstName.value,
@@ -80,8 +79,10 @@ function searchUser() {
   displayUser(newUsers);
   document.getElementById("tableBody").innerHTML = first;
 }
-
+userInfo = JSON.parse(localStorage.getItem("info"));
+displayUser(userInfo);
 searchUser();
+
 // CSV Section
 function downloadCSV(csv, filename) {
   var csvFile;
