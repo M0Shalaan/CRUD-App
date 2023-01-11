@@ -9,6 +9,16 @@ var title = document.querySelector(".title");
 var searchInput = document.getElementById("search");
 var idNum;
 var userInfo;
+if (localStorage.getItem("info") === null) {
+  userInfo = JSON.parse(localStorage.getItem("info"));
+  displayUser(userInfo);
+} else {
+  userInfo = [
+    { first: "test1", second: "test1", emailInput: "test1@test1" },
+    { first: "test2", second: "test2", emailInput: "test2@test2" },
+    { first: "test3", second: "test3", emailInput: "test3@test3" },
+  ];
+}
 
 function addUser() {
   var user = {
@@ -22,7 +32,6 @@ function addUser() {
     displayUser(userInfo);
     clearForm();
   } else {
-    
     window.alert("Error, Please Enter data!");
   }
 }
@@ -79,8 +88,7 @@ function searchUser() {
   displayUser(newUsers);
   document.getElementById("tableBody").innerHTML = first;
 }
-userInfo = JSON.parse(localStorage.getItem("info"));
-displayUser(userInfo);
+
 searchUser();
 
 // CSV Section
@@ -109,7 +117,7 @@ function exportTableToCSV(filename) {
   for (var i = 0; i < rows.length; i++) {
     var row = [],
       cols = rows[i].querySelectorAll("td, th");
-    for (var j = 0; j < cols.length-2; j++) {
+    for (var j = 0; j < cols.length - 2; j++) {
       row.push(cols[j].innerText);
     }
     csv.push(row.join(","));
